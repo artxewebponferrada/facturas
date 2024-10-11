@@ -19,6 +19,36 @@ Version:    1.1.0
 -------------------------------------------------------------------*/
 /** GLOBAL CLASSES **/
 
+@media only screen and (min-width: 1024px) {
+    .final-texto * {
+        text-align: right;
+    }
+    input#numero_factura, input#fecha_factura {
+        text-align: right;
+    }
+}
+input#vencimiento, input#fecha_factura {
+    width: auto;
+}
+button.btn.btn-success.btn-add-item.d-print-none {
+    font-size: small;
+}
+div#invoice_wrapper {
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+
+button.btn.btn-success.btn-add-item.d-print-none {
+    background: #f7f7f7;
+    color: #535353b5;
+    border: 1px solid #e9ecef;
+}
+
+.order-summary {
+    padding: 10px !important;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 .table {
     color: #535353;
 }
@@ -231,7 +261,7 @@ table th{
 }
 
 .invoice-1 .invoice-info {
-    background: #fff;
+    background: #f7f7f780;
     position: relative;
 }
 
@@ -1778,7 +1808,7 @@ table th{
 /** Invoice 7 start **/
 .invoice-7 {
     padding: 30px 0;
-    background: #fff6f6;
+    background: white;
 }
 
 .invoice-7 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -1855,8 +1885,8 @@ table th{
 }
 
 .invoice-7 .invoice-info {
-    padding: 50px 100px 20px;
-    background: #f7f7f7;
+    padding: 30px 80px 15px;
+    background: #f7f7f78c;
 }
 
 .invoice-7 .invoice-info p {
@@ -1900,7 +1930,7 @@ table th{
 
 .invoice-7 .invoice-informeshon {
     padding: 50px 100px 20px;
-    background: #f7f7f7;
+    background: #f7f7f78c;
 }
 
 .invoice-7 .text-muted {
