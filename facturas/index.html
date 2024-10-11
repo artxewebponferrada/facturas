@@ -207,61 +207,68 @@
                             <div class="table-responsive">
                                 <table class="table invoice-table">
                                     <thead class="bg-active">
-                                    <tr>
-                                        <th>Descripción</th>
-                                        <th class="text-center">Cantidad</th>
-                                        <th class="text-center">Precio (€)</th>
-                                        <th class="text-right">Importe (€)</th>
-                                    </tr>
+                                        <tr>
+                                            <th>Descripción</th>
+                                            <th class="text-center">Cantidad</th>
+                                            <th class="text-center">Precio (€)</th>
+                                            <th class="text-right">Importe (€)</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="item-row">
-                                        <td>
-                                            <div class="item-desc-1">
-                                                <input type="text" value="Lavado Turismo" class="editable-input descripcion">
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <input type="number" value="1" min="0" class="editable-input cantidad">
-                                        </td>
-                                        <td class="text-center">
-                                            <input type="number" value="369.00" min="0" step="0.01" class="editable-input precio">
-                                        </td>
-                                        <td class="text-right">
-                                            <input type="number" value="369.00" min="0" step="0.01" class="editable-input importe readonly-input" readonly>
-                                        </td>
-                                    </tr>
-                                    <!-- Puedes clonar esta fila para agregar más ítems -->
-                                    <tr>
-                                        <td colspan="3" class="text-end">Subtotal</td>
-                                        <td class="text-right">
-                                            <input type="number" value="369.00" min="0" step="0.01" class="editable-input subtotal readonly-input" readonly>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" class="text-end">IVA (21%)</td>
-                                        <td class="text-right">
-                                            <input type="number" value="77.49" min="0" step="0.01" class="editable-input iva readonly-input" readonly>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" class="text-end fw-bold">Total</td>
-                                        <td class="text-right fw-bold">
-                                            <input type="number" value="446.49" min="0" step="0.01" class="editable-input total readonly-input" readonly>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" class="text-end">Pagado</td>
-                                        <td class="text-right">
-                                            <input type="number" value="446.49" min="0" step="0.01" class="editable-input pagado">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" class="text-end">Total a Pagar</td>
-                                        <td class="text-right">
-                                            <input type="number" value="0.00" min="0" step="0.01" class="editable-input total_pagar readonly-input" readonly>
-                                        </td>
-                                    </tr>
+                                        <tr class="item-row">
+                                            <td>
+                                                <div class="item-desc-1">
+                                                    <input type="text" value="Lavado Turismo" class="editable-input descripcion">
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="number" value="1" min="0" class="editable-input cantidad">
+                                            </td>
+                                            <td class="text-center">
+                                                <!-- Precio por defecto cambiado de 369.00 a 9.00 -->
+                                                <input type="number" value="9.00" min="0" step="0.01" class="editable-input precio">
+                                            </td>
+                                            <td class="text-right">
+                                                <!-- Importe recalculado: 1 * 9.00 = 9.00 -->
+                                                <input type="number" value="9.00" min="0" step="0.01" class="editable-input importe readonly-input" readonly>
+                                            </td>
+                                        </tr>
+                                        <!-- Puedes clonar esta fila para agregar más ítems -->
+                                        <tr>
+                                            <td colspan="3" class="text-end">Subtotal</td>
+                                            <!-- Subtotal recalculado: 9.00 -->
+                                            <td class="text-right">
+                                                <input type="number" value="9.00" min="0" step="0.01" class="editable-input subtotal readonly-input" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="text-end">IVA (21%)</td>
+                                            <!-- IVA recalculado: 9.00 * 0.21 = 1.89 -->
+                                            <td class="text-right">
+                                                <input type="number" value="1.89" min="0" step="0.01" class="editable-input iva readonly-input" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="text-end fw-bold">Total</td>
+                                            <!-- Total recalculado: 9.00 + 1.89 = 10.89 -->
+                                            <td class="text-right fw-bold">
+                                                <input type="number" value="10.89" min="0" step="0.01" class="editable-input total readonly-input" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="text-end">Pagado</td>
+                                            <!-- Pagado igual al Total por defecto: 10.89 -->
+                                            <td class="text-right">
+                                                <input type="number" value="10.89" min="0" step="0.01" class="editable-input pagado">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="text-end">Total a Pagar</td>
+                                            <!-- Total a Pagar recalculado: 10.89 - 10.89 = 0.00 -->
+                                            <td class="text-right">
+                                                <input type="number" value="0.00" min="0" step="0.01" class="editable-input total_pagar readonly-input" readonly>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
