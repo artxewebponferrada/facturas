@@ -274,20 +274,6 @@
                             </div>
                         </div>
                         <!-- Información de pago -->
-                        <div class="invoice-informeshon">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="payment-info mb-30">
-                                        <h3 class="inv-title-1">Información de Pago</h3>
-                                        <ul class="bank-transfer-list-1 list-unstyled">
-                                            <li><strong>CIF/NIF:</strong> <input type="text" value="E24667024" class="editable-input" id="cif_nif"></li>
-                                            <li><strong>Móvil:</strong> <input type="text" value="643 34 00 52" class="editable-input" id="movil"></li>
-                                            <li><strong>Email:</strong> <input type="email" value="mihai_lavado@yahoo.es" class="editable-input" id="email"></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <!-- Footer fuera del invoice_wrapper para no incluirlo en la captura -->
                     <footer class="invoice-footer d-print-none" data-html2canvas-ignore="true">
@@ -488,8 +474,19 @@
                             position -= pageHeight;
                         }
 
-                        // Abre el PDF en una nueva ventana
-                        pdf.output('dataurlnewwindow');
+                        // Obtener el Blob del PDF
+                        var blob = pdf.output('blob');
+
+                        // Crear un objeto URL para el Blob
+                        var url = URL.createObjectURL(blob);
+
+                        // Abrir el PDF en una nueva pestaña
+                        window.open(url, '_blank');
+
+                        // Liberar el objeto URL después de un tiempo para liberar memoria
+                        setTimeout(function() {
+                            URL.revokeObjectURL(url);
+                        }, 1000);
                     }).catch(function(error){
                         console.error('Error al generar el PDF:', error);
                         alert('Ocurrió un error al generar el PDF. Revisa la consola para más detalles.');
