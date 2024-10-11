@@ -147,7 +147,7 @@
                         <div class="invoice-top">
                             <div class="row">
                                 <div class="col-sm-6">
-                                <h3>Lavado a Mano del Bierzo CB</h3>
+                                    <h3>Lavado a Mano del Bierzo CB</h3>
                                 </div>
                                 <div class="col-sm-6 final-texto">
                                     <div class="invoice text-end">
@@ -274,6 +274,20 @@
                             </div>
                         </div>
                         <!-- Información de pago -->
+                        <div class="invoice-informeshon">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="payment-info mb-30">
+                                        <h3 class="inv-title-1">Información de Pago</h3>
+                                        <ul class="bank-transfer-list-1 list-unstyled">
+                                            <li><strong>CIF/NIF:</strong> <input type="text" value="E24667024" class="editable-input" id="cif_nif"></li>
+                                            <li><strong>Móvil:</strong> <input type="text" value="643 34 00 52" class="editable-input" id="movil"></li>
+                                            <li><strong>Email:</strong> <input type="email" value="mihai_lavado@yahoo.es" class="editable-input" id="email"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- Footer fuera del invoice_wrapper para no incluirlo en la captura -->
                     <footer class="invoice-footer d-print-none" data-html2canvas-ignore="true">
@@ -281,11 +295,11 @@
                     </footer>
                     <!-- Botones de Acción (fuera del invoice_wrapper para no incluirlos en el PDF) -->
                     <div class="invoice-btn-section clearfix d-print-none mt-4" data-html2canvas-ignore="true">
-                        <a id="invoice_open_btn" href="ruta/a/tu/factura.pdf" class="btn btn-lg btn-theme" target="_blank">
-                            <i class="fa fa-eye"></i> Abrir Factura
-                        </a>
                         <a id="invoice_download_btn" class="btn btn-lg btn-download btn-theme">
                             <i class="fa fa-download"></i> Descargar Factura
+                        </a>
+                        <a id="invoice_open_btn" class="btn btn-lg btn-primary btn-theme ms-2">
+                            <i class="fa fa-eye"></i> Abrir Factura
                         </a>
                     </div>
                 </div>
@@ -437,6 +451,45 @@
 
                         // Guarda el PDF
                         pdf.save('factura.pdf');
+                    }).catch(function(error){
+                        console.error('Error al generar el PDF:', error);
+                        alert('Ocurrió un error al generar el PDF. Revisa la consola para más detalles.');
+                    });
+                });
+
+                // Función para abrir PDF en una nueva pestaña con Footer en cada página
+                document.getElementById('invoice_open_btn').addEventListener('click', function () {
+                    const invoiceWrapper = document.getElementById('invoice_wrapper');
+                    html2canvas(invoiceWrapper, { scale: 2 }).then(function (canvas) {
+                        var imgData = canvas.toDataURL('image/png');
+                        const { jsPDF } = window.jspdf;
+                        var pdf = new jsPDF('p', 'mm', 'a4');
+                        var imgWidth = 210; // Ancho A4 en mm
+                        var pageHeight = pdf.internal.pageSize.getHeight(); // Altura A4 en mm
+                        var imgHeight = canvas.height * imgWidth / canvas.width;
+                        var heightLeft = imgHeight;
+                        var position = 0;
+
+                        // Número de páginas
+                        var totalPages = Math.ceil(imgHeight / pageHeight);
+
+                        for (var i = 0; i < totalPages; i++) {
+                            if (i > 0) {
+                                pdf.addPage();
+                            }
+                            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                            
+                            // Agregar el footer como texto
+                            var footerText = "CIF/NIF: E24667024 Móvil: 643 34 00 52 Email: mihai_lavado@yahoo.es";
+                            pdf.setFontSize(10);
+                            pdf.text(footerText, imgWidth / 2, pageHeight - 10, { align: 'center' });
+                            
+                            heightLeft -= pageHeight;
+                            position -= pageHeight;
+                        }
+
+                        // Abre el PDF en una nueva ventana
+                        pdf.output('dataurlnewwindow');
                     }).catch(function(error){
                         console.error('Error al generar el PDF:', error);
                         alert('Ocurrió un error al generar el PDF. Revisa la consola para más detalles.');
